@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="g37eede70-468d-41a7-a262-7ccf5ce33d76_Definition" targetNamespace="http://bpmn.io/schema/bpmn" exporter="5Minds Studio" exporterVersion="1">
+  <bpmn:collaboration id="Collaboration_1cidyxu" name="">
+    <bpmn:participant id="Participant_0px403d" name="Ticketstornierung" processRef="g3b0939b4-3dbb-47af-84e2-fcd1765cf72e_Process" />
+  </bpmn:collaboration>
+  <bpmn:process id="g3b0939b4-3dbb-47af-84e2-fcd1765cf72e_Process" name="Ticketstornierung" isExecutable="true">
+    <bpmn:laneSet>
+      <bpmn:lane id="Lane_1xzf0d3">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_1jtjeg1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1wjcs4i</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_12hcjeo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0d4t7gf</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_1pj31aa</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_1" name="Stornierungsanfrage trifft ein">
+      <bpmn:outgoing>Flow_1cfe34o</bpmn:outgoing>
+      <bpmn:signalEventDefinition id="SignalEventDefinition_1opt10e" signalRef="Signal_ocEpUpjn" />
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1cfe34o" sourceRef="StartEvent_1" targetRef="Activity_0d4t7gf" />
+    <bpmn:exclusiveGateway id="Gateway_1jtjeg1" name="Anfrage akzeptiert?">
+      <bpmn:incoming>Flow_1vnocsf</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ffwyp6</bpmn:outgoing>
+      <bpmn:outgoing>Flow_1ayg10i</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_1vnocsf" sourceRef="Activity_0d4t7gf" targetRef="Gateway_1jtjeg1" />
+    <bpmn:sequenceFlow id="Flow_1ffwyp6" name="Ja" sourceRef="Gateway_1jtjeg1" targetRef="Activity_1wjcs4i" />
+    <bpmn:task id="Activity_1wjcs4i" name="Ticket entwerten">
+      <bpmn:incoming>Flow_1ffwyp6</bpmn:incoming>
+      <bpmn:outgoing>Flow_0nk63oq</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="Event_12hcjeo" name="Ticket entwertet">
+      <bpmn:incoming>Flow_0nk63oq</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0nk63oq" sourceRef="Activity_1wjcs4i" targetRef="Event_12hcjeo" />
+    <bpmn:sequenceFlow id="Flow_1ayg10i" name="Nein" sourceRef="Gateway_1jtjeg1" targetRef="Event_1pj31aa" />
+    <bpmn:userTask id="Activity_0d4t7gf" name="Stornierungsanfrage prüfen">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="FormField_sIOvQLWR" type="confirm" customForm="{&#34;confirmButtonText&#34;:&#34;Anfrage annehmen&#34;,&#34;declineButtonText&#34;:&#34;Anfrage ablehnen&#34;}" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1cfe34o</bpmn:incoming>
+      <bpmn:outgoing>Flow_1vnocsf</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_1pj31aa" name="Stornierung ungültig">
+      <bpmn:documentation>Muss ich wieder in Hauptprozess?</bpmn:documentation>
+      <bpmn:incoming>Flow_1ayg10i</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmn:signal id="Signal_ocEpUpjn" name="Stornierung" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1cidyxu">
+      <bpmndi:BPMNShape id="Participant_0px403d_di" bpmnElement="Participant_0px403d" isHorizontal="true">
+        <dc:Bounds x="5" y="4" width="685" height="346" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1xzf0d3_di" bpmnElement="Lane_1xzf0d3" isHorizontal="true">
+        <dc:Bounds x="35" y="4" width="655" height="346" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1nofure_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="92" y="152" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="69" y="195" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1jtjeg1_di" bpmnElement="Gateway_1jtjeg1" isMarkerVisible="true">
+        <dc:Bounds x="335" y="145" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="395" y="156" width="54" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1wjcs4i_di" bpmnElement="Activity_1wjcs4i">
+        <dc:Bounds x="440" y="30" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_12hcjeo_di" bpmnElement="Event_12hcjeo">
+        <dc:Bounds x="602" y="52" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="581" y="95" width="78" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1hk7j04_di" bpmnElement="Activity_0d4t7gf">
+        <dc:Bounds x="190" y="130" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1pj31aa_di" bpmnElement="Event_1pj31aa">
+        <dc:Bounds x="602" y="222" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="592" y="265" width="57" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1cfe34o_di" bpmnElement="Flow_1cfe34o">
+        <di:waypoint x="128" y="170" />
+        <di:waypoint x="190" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1vnocsf_di" bpmnElement="Flow_1vnocsf">
+        <di:waypoint x="290" y="170" />
+        <di:waypoint x="335" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ffwyp6_di" bpmnElement="Flow_1ffwyp6">
+        <di:waypoint x="360" y="145" />
+        <di:waypoint x="360" y="70" />
+        <di:waypoint x="440" y="70" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="369" y="105" width="12" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0nk63oq_di" bpmnElement="Flow_0nk63oq">
+        <di:waypoint x="540" y="70" />
+        <di:waypoint x="602" y="70" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ayg10i_di" bpmnElement="Flow_1ayg10i">
+        <di:waypoint x="360" y="195" />
+        <di:waypoint x="360" y="240" />
+        <di:waypoint x="602" y="240" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="364" y="215" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
