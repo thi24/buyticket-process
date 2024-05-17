@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Ticketscannen1_Definition" targetNamespace="http://bpmn.io/schema/bpmn" exporter="5Minds Studio" exporterVersion="1">
+  <bpmn:collaboration id="Collaboration_1570dlv">
+    <bpmn:participant id="Participant_0w3kwh6" name="TicketScannen" processRef="Process_0gp68ez" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_0gp68ez" name="TicketScannen" isExecutable="true">
+    <bpmn:startEvent id="Event_00jlcrs" name="Ticket scannen">
+      <bpmn:outgoing>Flow_1bg3ti1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:scriptTask id="Activity_0aykqvs" name="Uhrzeit in Token befüllen">
+      <bpmn:incoming>Flow_1bg3ti1</bpmn:incoming>
+      <bpmn:outgoing>Flow_1huyjzw</bpmn:outgoing>
+      <bpmn:script>let currentDate = new Date();
+let currentHour = currentDate.getUTCHours();
+let currentMinute = currentDate.getUTCMinutes();
+let currentSecond = currentDate.getUTCSeconds();
+
+  currentHour = currentHour + 2;
+
+let formattedTime = `${currentHour}:${currentMinute}:${currentSecond}`;
+
+return {
+  ...token.current,
+  "Uhrzeit": formattedTime
+};
+</bpmn:script>
+    </bpmn:scriptTask>
+    <bpmn:sequenceFlow id="Flow_1bg3ti1" sourceRef="Event_00jlcrs" targetRef="Activity_0aykqvs" />
+    <bpmn:sequenceFlow id="Flow_1huyjzw" sourceRef="Activity_0aykqvs" targetRef="Activity_07bkp2i" />
+    <bpmn:sequenceFlow id="Flow_01obmyy" sourceRef="Activity_07bkp2i" targetRef="Event_1dbe9gw" />
+    <bpmn:serviceTask id="Activity_07bkp2i" name="Ticketinfo erhalten">
+      <bpmn:documentation>Ticket entwertet mit Uhrzeit
+{
+    Uhrzeit: "aktuelleZeit aus ScriptTask"
+    TicketId ueber URL
+}</bpmn:documentation>
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="module" value="HttpClient" />
+          <camunda:property name="method" value="put" />
+          <camunda:property name="params" value="[&#34;&#34;, {&#10;    ...token.current&#10;}]" />
+          <camunda:property name="studio.paramBody" value="{&#10;    ...token.current&#10;}" />
+          <camunda:property name="studio.paramContentType" />
+          <camunda:property name="studio.paramAuthorization" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_1huyjzw</bpmn:incoming>
+      <bpmn:outgoing>Flow_01obmyy</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="Event_1dbe9gw" name="Ticket gescannt">
+      <bpmn:incoming>Flow_01obmyy</bpmn:incoming>
+      <bpmn:signalEventDefinition id="SignalEventDefinition_0wz14xk" signalRef="Signal_YmH0PZ4x" />
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmn:signal id="Signal_YmH0PZ4x" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1570dlv">
+      <bpmndi:BPMNShape id="Participant_0w3kwh6_di" bpmnElement="Participant_0w3kwh6" isHorizontal="true">
+        <dc:Bounds x="160" y="260" width="780" height="270" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_00jlcrs_di" bpmnElement="Event_00jlcrs">
+        <dc:Bounds x="222" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="204" y="425" width="73" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0g2fb61_di" bpmnElement="Activity_0aykqvs">
+        <dc:Bounds x="370" y="360" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0ywnpq6" bpmnElement="Activity_07bkp2i">
+        <dc:Bounds x="580" y="360" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ooxu1o_di" bpmnElement="Event_1dbe9gw">
+        <dc:Bounds x="812" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="792" y="425" width="77" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1bg3ti1_di" bpmnElement="Flow_1bg3ti1">
+        <di:waypoint x="258" y="400" />
+        <di:waypoint x="370" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1huyjzw_di" bpmnElement="Flow_1huyjzw">
+        <di:waypoint x="470" y="400" />
+        <di:waypoint x="580" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_01obmyy_di" bpmnElement="Flow_01obmyy">
+        <di:waypoint x="680" y="400" />
+        <di:waypoint x="812" y="400" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
