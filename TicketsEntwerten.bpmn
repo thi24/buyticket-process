@@ -18,11 +18,10 @@
     <bpmn:serviceTask id="Activity_1eyn9no" name="Tickets entwerten">
       <bpmn:extensionElements>
         <camunda:properties>
-          <camunda:property name="studio.paramUrl" value="http://benevolo.de/tickets/{Ticketid}/status" />
+          <camunda:property name="studio.paramUrl" value="https://dev.benevolo.de/api/analytics-service/validated-tickets/event/{eventId}" />
           <camunda:property name="module" value="HttpClient" />
           <camunda:property name="method" value="get" />
-          <camunda:property name="params" value="[&#34;http://benevolo.de/tickets/{Ticketid}/status&#34;]" />
-          <camunda:property name="studio.paramContentType" />
+          <camunda:property name="params" value="[&#34;https://dev.benevolo.de/api/analytics-service/validated-tickets/event/{eventId}&#34;]" />
           <camunda:property name="studio.paramAuthorization" />
         </camunda:properties>
       </bpmn:extensionElements>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="TicketsGenerierenNeu_Definition" targetNamespace="http://bpmn.io/schema/bpmn" exporter="5Minds Studio" exporterVersion="1">
+  <bpmn:collaboration id="Collaboration_1cidyxu" name="">
+    <bpmn:participant id="Participant_0px403d" name="TicketsGenerierenNeu" processRef="TicketsGenerierenNeu_Process" />
+  </bpmn:collaboration>
+  <bpmn:process id="TicketsGenerierenNeu_Process" name="TicketsGenerierenNeu" isExecutable="true">
+    <bpmn:laneSet>
+      <bpmn:lane id="Lane_1xzf0d3">
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0ygdoob</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_05nvr2g</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="StartEvent_1" name="Start">
+      <bpmn:outgoing>Flow_18v2wis</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="Event_0ygdoob" name="Tickets erfolgreich generiert">
+      <bpmn:incoming>Flow_1ej8qpa</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_18v2wis" sourceRef="StartEvent_1" targetRef="Activity_05nvr2g" />
+    <bpmn:sequenceFlow id="Flow_1ej8qpa" sourceRef="Activity_05nvr2g" targetRef="Event_0ygdoob" />
+    <bpmn:serviceTask id="Activity_05nvr2g" name="Tickets generieren">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="module" value="HttpClient" />
+          <camunda:property name="method" value="post" />
+          <camunda:property name="params" value="[&#34;https://dev.benevolo.de/api/ticket-service/tickets &#34;, &#34;token.current&#34;, {&#34;headers&#34;:{&#34;Content-Type&#34;:&#34;application/json&#34;,&#34;Authorization&#34;:&#34;Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ6TnQ5dnl6ekxzNGhUb3RKRGplSFhkRUtDWGhCckZGMG1ka1FjQktad2FZIn0.eyJleHAiOjE3MTY5MTU5NjIsImlhdCI6MTcxNjkwODc2MiwiYXV0aF90aW1lIjoxNzE2ODg4MjA3LCJqdGkiOiJhNDRjMjQ5NS1hMzBkLTQ0NGUtYTMxYS03NGNiYzExYWU4ODkiLCJpc3MiOiJodHRwczovL2F1dGguYmVuZXZvbG8uZGUvcmVhbG1zL2JlbmV2b2xvIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6Ijg5YTEyYzViLWNjNWEtNDc1NS1iMDk5LWE5NTFhZjI5MDk1MyIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJlbmV2b2xvIiwic2Vzc2lvbl9zdGF0ZSI6IjU4MGQ4YTQwLWFmN2MtNDkwMi1hNTE0LTBlNWFlNjdiYjZhZCIsImFjciI6IjAiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly9iZW5ldm9sby5kZSIsImh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWJlbmV2b2xvIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwic2lkIjoiNTgwZDhhNDAtYWY3Yy00OTAyLWE1MTQtMGU1YWU2N2JiNmFkIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJ0ZXN0IHRlc3QiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0ZXN0IiwiZ2l2ZW5fbmFtZSI6InRlc3QiLCJmYW1pbHlfbmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3QyQHRlc3QuZGUifQ.tcePCdbyl84NYzhywFdGcDGYRHbrHaHhzWVl2o9Fl1fXuDczIQs8DA_NNsHbWXeV5gwdJJk8B1QjHJJSNrwPK3kpunnHf5NhAWF3yqNNt6cJQLLykopLztQkHP8aSj9C_Vy1FaMuD5KFhcQOQpkQ2XOZ2TZ3imb4_NkHY5s5QzfLhfx7MAXOgxOKYOHBrcQLxKJPks5sizvxRVNjWnU6cZMlrozMZVxvecluS6tiG1OhIaXFyq2CJpfLVzCq1we396w-Zw_OileoNN7lCHW-Fw2Y4UQc1-mhVWGdKwtUglO4mFO_qLk2HgtWT63u9Ctt0z8nyw4Yp4kz-nsZSifEdw&#34;}}]" />
+          <camunda:property name="studio.paramUrl" value="https://dev.benevolo.de/api/ticket-service/tickets " />
+          <camunda:property name="studio.paramAuthorization" value="Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ6TnQ5dnl6ekxzNGhUb3RKRGplSFhkRUtDWGhCckZGMG1ka1FjQktad2FZIn0.eyJleHAiOjE3MTY5MTU5NjIsImlhdCI6MTcxNjkwODc2MiwiYXV0aF90aW1lIjoxNzE2ODg4MjA3LCJqdGkiOiJhNDRjMjQ5NS1hMzBkLTQ0NGUtYTMxYS03NGNiYzExYWU4ODkiLCJpc3MiOiJodHRwczovL2F1dGguYmVuZXZvbG8uZGUvcmVhbG1zL2JlbmV2b2xvIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6Ijg5YTEyYzViLWNjNWEtNDc1NS1iMDk5LWE5NTFhZjI5MDk1MyIsInR5cCI6IkJlYXJlciIsImF6cCI6ImJlbmV2b2xvIiwic2Vzc2lvbl9zdGF0ZSI6IjU4MGQ4YTQwLWFmN2MtNDkwMi1hNTE0LTBlNWFlNjdiYjZhZCIsImFjciI6IjAiLCJhbGxvd2VkLW9yaWdpbnMiOlsiaHR0cHM6Ly9iZW5ldm9sby5kZSIsImh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCJdLCJyZWFsbV9hY2Nlc3MiOnsicm9sZXMiOlsib2ZmbGluZV9hY2Nlc3MiLCJkZWZhdWx0LXJvbGVzLWJlbmV2b2xvIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwic2lkIjoiNTgwZDhhNDAtYWY3Yy00OTAyLWE1MTQtMGU1YWU2N2JiNmFkIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJ0ZXN0IHRlc3QiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0ZXN0IiwiZ2l2ZW5fbmFtZSI6InRlc3QiLCJmYW1pbHlfbmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3QyQHRlc3QuZGUifQ.tcePCdbyl84NYzhywFdGcDGYRHbrHaHhzWVl2o9Fl1fXuDczIQs8DA_NNsHbWXeV5gwdJJk8B1QjHJJSNrwPK3kpunnHf5NhAWF3yqNNt6cJQLLykopLztQkHP8aSj9C_Vy1FaMuD5KFhcQOQpkQ2XOZ2TZ3imb4_NkHY5s5QzfLhfx7MAXOgxOKYOHBrcQLxKJPks5sizvxRVNjWnU6cZMlrozMZVxvecluS6tiG1OhIaXFyq2CJpfLVzCq1we396w-Zw_OileoNN7lCHW-Fw2Y4UQc1-mhVWGdKwtUglO4mFO_qLk2HgtWT63u9Ctt0z8nyw4Yp4kz-nsZSifEdw" />
+          <camunda:property name="studio.paramAuthorization" value="eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ6TnQ5dnl6ekxzNGhUb3RKRGplSFhkRUtDWGhCckZGMG1ka1FjQktad2FZIn0" />
+          <camunda:property name="studio.paramContentType" value="application/json" />
+          <camunda:property name="studio.paramBody" value="token.current" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_18v2wis</bpmn:incoming>
+      <bpmn:outgoing>Flow_1ej8qpa</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1cidyxu">
+      <bpmndi:BPMNShape id="Participant_0px403d_di" bpmnElement="Participant_0px403d" isHorizontal="true">
+        <dc:Bounds x="5" y="4" width="655" height="346" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1xzf0d3_di" bpmnElement="Lane_1xzf0d3" isHorizontal="true">
+        <dc:Bounds x="35" y="4" width="625" height="346" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="92" y="152" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="98" y="195" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ygdoob_di" bpmnElement="Event_0ygdoob">
+        <dc:Bounds x="552" y="152" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="526" y="195" width="88" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ltq8eq_di" bpmnElement="Activity_05nvr2g">
+        <dc:Bounds x="290" y="130" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_18v2wis_di" bpmnElement="Flow_18v2wis">
+        <di:waypoint x="128" y="170" />
+        <di:waypoint x="290" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ej8qpa_di" bpmnElement="Flow_1ej8qpa">
+        <di:waypoint x="390" y="170" />
+        <di:waypoint x="552" y="170" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
