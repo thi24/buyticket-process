@@ -1,72 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="g03c39731-f6e7-4a98-98a6-3f69a6136053_Definition" targetNamespace="http://bpmn.io/schema/bpmn" exporter="5Minds Studio" exporterVersion="1">
-  <bpmn:collaboration id="Collaboration_1cidyxu" name="">
-    <bpmn:participant id="Participant_0px403d" name="Tickets generieren" processRef="g2c73a0e2-880e-49e4-8dad-45a79478445b_Process" />
-  </bpmn:collaboration>
-  <bpmn:process id="g2c73a0e2-880e-49e4-8dad-45a79478445b_Process" name="Tickets generieren" isExecutable="true">
-    <bpmn:laneSet>
-      <bpmn:lane id="Lane_1xzf0d3">
-        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_0ljquuy</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_0p7bhdr</bpmn:flowNodeRef>
-      </bpmn:lane>
-    </bpmn:laneSet>
-    <bpmn:startEvent id="StartEvent_1" name="Tickets generieren">
-      <bpmn:outgoing>Flow_1943u3m</bpmn:outgoing>
-    </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_1943u3m" sourceRef="StartEvent_1" targetRef="Activity_0ljquuy" />
-    <bpmn:sequenceFlow id="Flow_1kehup0" sourceRef="Activity_0ljquuy" targetRef="Event_0p7bhdr" />
-    <bpmn:serviceTask id="Activity_0ljquuy" name="HTTP Post Tickets">
-      <bpmn:extensionElements>
-        <camunda:properties>
-          <camunda:property name="module" value="HttpClient" />
-          <camunda:property name="method" value="post" />
-          <camunda:property name="params" value="[&#34;https://dev.benevolo.de/api/ticket-service/tickets&#34;, {&#10;    &#34;eventId&#34;:&#34;383f700f-5449-4e40-b509-bee0b5d139d6&#34;,&#10;    &#34;customer&#34;: {&#10;        &#34;stripeId&#34;:&#34;3894stripeId28943&#34;,&#10;        &#34;email&#34;: &#34;tobias.weiss1@gmx.de&#34;&#10;    },&#10;    &#34;bookingItems&#34;:&#10;[&#10;    {&#10;        &#34;quantity&#34;: 1,&#10;        &#34;ticketTypeId&#34;:&#34;223f700f-5449-4e40-b509-bee0b5d139d6&#34;&#10;    }&#10;    &#10;]&#10;}, {&#34;headers&#34;:{&#34;Content-Type&#34;:&#34;application/json&#34;,&#34;Authorization&#34;:&#34;Bearer ZwZjA2yArALFjvW21DJiOMsYPSmSVad1eAhbpmEmhdWkAoKrxvZMvTOliWFZ7huRfoVcgOXuYcvi5KFcCqHTovDuJ3EkWPjURo6IsM8A&#34;}}]" />
-          <camunda:property name="studio.paramUrl" value="https://dev.benevolo.de/api/ticket-service/tickets" />
-          <camunda:property name="studio.paramAuthorization" value="Bearer ZwZjA2yArALFjvW21DJiOMsYPSmSVad1eAhbpmEmhdWkAoKrxvZMvTOliWFZ7huRfoVcgOXuYcvi5KFcCqHTovDuJ3EkWPjURo6IsM8A" />
-          <camunda:property name="studio.paramBody" value="{&#10;    &#34;eventId&#34;:&#34;383f700f-5449-4e40-b509-bee0b5d139d6&#34;,&#10;    &#34;customer&#34;: {&#10;        &#34;stripeId&#34;:&#34;3894stripeId28943&#34;,&#10;        &#34;email&#34;: &#34;tobias.weiss1@gmx.de&#34;&#10;    },&#10;    &#34;bookingItems&#34;:&#10;[&#10;    {&#10;        &#34;quantity&#34;: 1,&#10;        &#34;ticketTypeId&#34;:&#34;223f700f-5449-4e40-b509-bee0b5d139d6&#34;&#10;    }&#10;    &#10;]&#10;}" />
-          <camunda:property name="studio.paramContentType" value="application/json" />
-        </camunda:properties>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_1943u3m</bpmn:incoming>
-      <bpmn:outgoing>Flow_1kehup0</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:endEvent id="Event_0p7bhdr" name="Ticket generiert">
-      <bpmn:incoming>Flow_1kehup0</bpmn:incoming>
-    </bpmn:endEvent>
-  </bpmn:process>
-  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1cidyxu">
-      <bpmndi:BPMNShape id="Participant_0px403d_di" bpmnElement="Participant_0px403d" isHorizontal="true">
-        <dc:Bounds x="5" y="4" width="495" height="346" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_1xzf0d3_di" bpmnElement="Lane_1xzf0d3" isHorizontal="true">
-        <dc:Bounds x="35" y="4" width="465" height="346" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
-        <dc:Bounds x="92" y="152" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="84" y="195" width="53" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_12licca_di" bpmnElement="Activity_0ljquuy">
-        <dc:Bounds x="220" y="130" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0p7bhdr_di" bpmnElement="Event_0p7bhdr">
-        <dc:Bounds x="402" y="152" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="382" y="195" width="76" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_1943u3m_di" bpmnElement="Flow_1943u3m">
-        <di:waypoint x="128" y="170" />
-        <di:waypoint x="220" y="170" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1kehup0_di" bpmnElement="Flow_1kehup0">
-        <di:waypoint x="320" y="170" />
-        <di:waypoint x="402" y="170" />
-      </bpmndi:BPMNEdge>
-    </bpmndi:BPMNPlane>
-  </bpmndi:BPMNDiagram>
-</bpmn:definitions>
