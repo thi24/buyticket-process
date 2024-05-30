@@ -3,22 +3,22 @@
   <bpmn:collaboration id="Collaboration_1cidyxu" name="">
     <bpmn:participant id="Participant_0px403d" name="TicketReminder" processRef="TicketReminder_Process" />
     <bpmn:participant id="Participant_1z0e4h9" name="Admin" />
-    <bpmn:messageFlow id="Flow_0qh289y" name="Event angelegt" sourceRef="Participant_1z0e4h9" targetRef="StartEvent_1" />
+    <bpmn:messageFlow id="Flow_0qh289y" name="Event angelegt" sourceRef="Participant_1z0e4h9" targetRef="startTicketReminder" />
     <bpmn:messageFlow id="Flow_1qews05" name="Stornierung" sourceRef="Participant_1z0e4h9" targetRef="Event_0norydw" />
   </bpmn:collaboration>
   <bpmn:process id="TicketReminder_Process" name="TicketReminder" isExecutable="true">
     <bpmn:laneSet>
       <bpmn:lane id="Lane_1xzf0d3">
-        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>startTicketReminder</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_09rt7hi</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_00ap4d3</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_0norydw</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_01zfj7w</bpmn:flowNodeRef>
       </bpmn:lane>
     </bpmn:laneSet>
-    <bpmn:startEvent id="StartEvent_1" name="Start">
+    <bpmn:startEvent id="startTicketReminder" name="StartTicketReminder">
       <bpmn:outgoing>Flow_0uaxuqo</bpmn:outgoing>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_1nod4kq" />
+      <bpmn:messageEventDefinition id="MessageEventDefinition_1nod4kq" messageRef="Message_HponsYhA" />
     </bpmn:startEvent>
     <bpmn:endEvent id="Event_09rt7hi" name="Ticket Reminder versandt">
       <bpmn:incoming>Flow_0bdru6n</bpmn:incoming>
@@ -70,7 +70,7 @@
       </bpmn:endEvent>
       <bpmn:sequenceFlow id="Flow_13lzqt5" sourceRef="Activity_0izg591" targetRef="Event_1bmsf4j" />
     </bpmn:subProcess>
-    <bpmn:sequenceFlow id="Flow_0uaxuqo" sourceRef="StartEvent_1" targetRef="Activity_00ap4d3" />
+    <bpmn:sequenceFlow id="Flow_0uaxuqo" sourceRef="startTicketReminder" targetRef="Activity_00ap4d3" />
     <bpmn:sequenceFlow id="Flow_0bdru6n" sourceRef="Activity_00ap4d3" targetRef="Event_09rt7hi" />
     <bpmn:boundaryEvent id="Event_0norydw" name="Stornierung empfangen" attachedToRef="Activity_00ap4d3">
       <bpmn:outgoing>Flow_01ltbax</bpmn:outgoing>
@@ -81,6 +81,7 @@
       <bpmn:incoming>Flow_01ltbax</bpmn:incoming>
     </bpmn:endEvent>
   </bpmn:process>
+  <bpmn:message id="Message_HponsYhA" name="Reminder" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1cidyxu">
       <bpmndi:BPMNShape id="Participant_0px403d_di" bpmnElement="Participant_0px403d" isHorizontal="true">
@@ -89,10 +90,10 @@
       <bpmndi:BPMNShape id="Lane_1xzf0d3_di" bpmnElement="Lane_1xzf0d3" isHorizontal="true">
         <dc:Bounds x="35" y="-50" width="925" height="530" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_06crai5_di" bpmnElement="StartEvent_1">
+      <bpmndi:BPMNShape id="Event_06crai5_di" bpmnElement="startTicketReminder">
         <dc:Bounds x="92" y="152" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="97" y="128" width="25" height="14" />
+          <dc:Bounds x="68" y="128" width="84" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_09rt7hi_di" bpmnElement="Event_09rt7hi">
